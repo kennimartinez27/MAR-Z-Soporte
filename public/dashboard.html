@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel · MAR-Z Soporte</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="contenedor">
+    <header class="barra">
+      <div>
+        <strong>MAR-Z Soporte</strong>
+        · <span id="nombre-usuario"></span>
+      </div>
+      <button class="secundario" id="btn-logout">Cerrar sesión</button>
+    </header>
+
+    <!-- HU02 -->
+    <section class="panel" data-rol="Solicitante">
+      <h2>Nueva solicitud</h2>
+      <form id="form-nueva-solicitud" class="form-grid">
+        <div>
+          <label for="titulo">Título</label>
+          <input id="titulo" name="titulo" type="text" required />
+        </div>
+        <div>
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" name="descripcion" rows="3" required></textarea>
+        </div>
+        <div>
+          <label for="categoria">Categoría</label>
+          <input id="categoria" name="categoria" type="text" required />
+        </div>
+        <div class="mensaje" id="mensaje-nueva-solicitud"></div>
+        <button type="submit">Crear solicitud</button>
+      </form>
+    </section>
+
+    <!-- HU03 -->
+    <section class="panel" data-rol="Solicitante">
+      <h2>Mis solicitudes</h2>
+      <table id="tabla-mis-solicitudes">
+        <thead>
+          <tr><th>ID</th><th>Título</th><th>Categoría</th><th>Estado</th><th>Prioridad</th><th>Actualizada</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- HU04 -->
+    <section class="panel" data-rol="Coordinador">
+      <h2>Priorizar solicitudes</h2>
+      <label for="ordenar-por">Ordenar por</label>
+      <select id="ordenar-por">
+        <option value="fecha">Fecha</option>
+        <option value="prioridad">Prioridad</option>
+        <option value="estado">Estado</option>
+      </select>
+      <table id="tabla-todas-solicitudes">
+        <thead>
+          <tr><th>ID</th><th>Título</th><th>Categoría</th><th>Estado</th><th>Prioridad</th><th>Creada</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section class="panel" data-rol="Agente" hidden>
+      <h2>Solicitudes asignadas</h2>
+      <p>Disponible en el Sprint 2 (HU05–HU08).</p>
+    </section>
+
+    <section class="panel" data-rol="Auditor" hidden>
+      <h2>Historial de auditoría</h2>
+      <p>Disponible en el Sprint 3 (HU09–HU12).</p>
+    </section>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

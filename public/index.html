@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>MAR-Z Soporte</title>
+</head>
+<body>
+  <script>
+    fetch('/api/auth/me').then((res) => {
+      window.location.href = res.ok ? '/dashboard.html' : '/login.html';
+    });
+  </script>
+</body>
+</html>
