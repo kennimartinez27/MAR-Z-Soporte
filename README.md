@@ -1,4 +1,19 @@
-# MAR-Z · Gestión de solicitudes de soporte
+# MAR-Z-Soporte
+
+Producto esperado: plataforma web de gestión colaborativa de solicitudes de soporte. El caso es
+idéntico para Scrum y MAR-Z Core. No contiene funcionalidades para inferir emociones, perfiles
+psicológicos o desempeño individual. La evaluación se basa en criterios funcionales y técnicos
+comunes.
+
+## Contexto
+
+Una organización/empresa que tiene sitios de distribución en varias partes del país necesita
+registrar, priorizar, asignar, atender y auditar solicitudes de soporte interno. Actualmente usa
+mensajes dispersos y no puede conocer tiempos, responsables ni estado. El producto debe facilitar
+el servicio sin exponer información innecesaria ni convertir la trazabilidad en vigilancia
+personal.
+
+## Estado del proyecto
 
 Caso de estudio del Anexo 10 (v2.0). Sprint 1: HU01–HU04. Sprint 2: HU05–HU08. Sprint 3: HU09–HU12.
 
