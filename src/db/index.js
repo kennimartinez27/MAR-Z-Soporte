@@ -20,8 +20,24 @@ async function connect() {
     : new SQL.Database();
 
   db.run(fs.readFileSync(SCHEMA_PATH, 'utf8'));
+  aplicarMigraciones();
   persist();
   return db;
+}
+
+// CREATE TABLE IF NOT EXISTS no agrega columnas a una tabla ya existente, así que las bases
+// creadas antes del cambio controlado del Sprint 2 (justificación/fecha objetivo) se completan aquí.
+function aplicarMigraciones() {
+  const columnas = all("PRAGMA table_info(solicitudes)").map((c) => c.name);
+  if (!columnas.includes('prioridad_sugerida')) {
+    db.run('ALTER TABLE solicitudes ADD COLUMN prioridad_sugerida TEXT');
+  }
+  if (!columnas.includes('justificacion')) {
+    db.run('ALTER TABLE solicitudes ADD COLUMN justificacion TEXT');
+  }
+  if (!columnas.includes('fecha_objetivo')) {
+    db.run('ALTER TABLE solicitudes ADD COLUMN fecha_objetivo TEXT');
+  }
 }
 
 function persist() {

@@ -6,6 +6,8 @@ const db = require('./index');
 const USUARIOS_SEED = [
   { username: 'solicitante1', password: 'Solicitante#123', rol: 'Solicitante' },
   { username: 'agente1', password: 'Agente#123', rol: 'Agente' },
+  { username: 'agente2', password: 'Agente#123', rol: 'Agente' },
+  { username: 'agente_inactivo', password: 'Agente#123', rol: 'Agente', activo: 0 },
   { username: 'coordinador1', password: 'Coordinador#123', rol: 'Coordinador' },
   { username: 'auditor1', password: 'Auditor#123', rol: 'Auditor' },
 ];
@@ -21,10 +23,11 @@ async function seed() {
 
   for (const u of USUARIOS_SEED) {
     const hash = bcrypt.hashSync(u.password, 10);
-    db.run('INSERT INTO usuarios (username, password_hash, rol) VALUES (?, ?, ?)', [
+    db.run('INSERT INTO usuarios (username, password_hash, rol, activo) VALUES (?, ?, ?, ?)', [
       u.username,
       hash,
       u.rol,
+      u.activo ?? 1,
     ]);
   }
 

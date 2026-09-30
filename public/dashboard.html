@@ -13,7 +13,13 @@
         <strong>MAR-Z Soporte</strong>
         · <span id="nombre-usuario"></span>
       </div>
-      <button class="secundario" id="btn-logout">Cerrar sesión</button>
+      <div class="acciones-barra">
+        <div class="notificaciones" id="notificaciones" hidden>
+          <button class="secundario" id="btn-notificaciones">🔔 <span id="contador-notificaciones"></span></button>
+          <ul id="lista-notificaciones" hidden></ul>
+        </div>
+        <button class="secundario" id="btn-logout">Cerrar sesión</button>
+      </div>
     </header>
 
     <!-- HU02 -->
@@ -32,47 +38,121 @@
           <label for="categoria">Categoría</label>
           <input id="categoria" name="categoria" type="text" required />
         </div>
+        <div>
+          <label>
+            <input type="checkbox" id="check-prioridad-alta" style="width:auto" />
+            Solicitar prioridad Alta
+          </label>
+        </div>
+        <div id="campos-prioridad-alta" hidden>
+          <label for="justificacion-alta">Justificación</label>
+          <textarea id="justificacion-alta" rows="2"></textarea>
+          <label for="fecha-objetivo-alta">Fecha objetivo</label>
+          <input id="fecha-objetivo-alta" type="date" />
+        </div>
         <div class="mensaje" id="mensaje-nueva-solicitud"></div>
         <button type="submit">Crear solicitud</button>
       </form>
     </section>
 
-    <!-- HU03 -->
+    <!-- HU03 / HU08 / HU09 -->
     <section class="panel" data-rol="Solicitante">
       <h2>Mis solicitudes</h2>
+      <div class="filtros" id="filtros-mis-solicitudes">
+        <input type="search" data-filtro="q" placeholder="Buscar por título o descripción…" />
+        <select data-filtro="estado">
+          <option value="">Estado (todos)</option>
+          <option>Nuevo</option><option>Asignada</option><option>En progreso</option>
+          <option>Resuelta</option><option>Reabierta</option><option>Cerrada</option>
+        </select>
+        <select data-filtro="prioridad">
+          <option value="">Prioridad (todas)</option>
+          <option>Baja</option><option>Media</option><option>Alta</option>
+        </select>
+        <input type="text" data-filtro="categoria" placeholder="Categoría" />
+      </div>
       <table id="tabla-mis-solicitudes">
         <thead>
-          <tr><th>ID</th><th>Título</th><th>Categoría</th><th>Estado</th><th>Prioridad</th><th>Actualizada</th></tr>
+          <tr><th>ID</th><th>Título</th><th>Categoría</th><th>Estado</th><th>Prioridad</th><th>Sugerida</th><th>Actualizada</th><th>Cierre</th></tr>
         </thead>
         <tbody></tbody>
       </table>
     </section>
 
-    <!-- HU04 -->
+    <!-- HU04 / HU09 -->
     <section class="panel" data-rol="Coordinador">
       <h2>Priorizar solicitudes</h2>
-      <label for="ordenar-por">Ordenar por</label>
-      <select id="ordenar-por">
-        <option value="fecha">Fecha</option>
-        <option value="prioridad">Prioridad</option>
-        <option value="estado">Estado</option>
-      </select>
+      <div class="filtros" id="filtros-todas-solicitudes">
+        <input type="search" data-filtro="q" placeholder="Buscar por título o descripción…" />
+        <select data-filtro="estado">
+          <option value="">Estado (todos)</option>
+          <option>Nuevo</option><option>Asignada</option><option>En progreso</option>
+          <option>Resuelta</option><option>Reabierta</option><option>Cerrada</option>
+        </select>
+        <select data-filtro="prioridad">
+          <option value="">Prioridad (todas)</option>
+          <option>Baja</option><option>Media</option><option>Alta</option>
+        </select>
+        <input type="text" data-filtro="categoria" placeholder="Categoría" />
+        <label for="ordenar-por">Ordenar por</label>
+        <select id="ordenar-por">
+          <option value="fecha">Fecha</option>
+          <option value="prioridad">Prioridad</option>
+          <option value="estado">Estado</option>
+        </select>
+      </div>
       <table id="tabla-todas-solicitudes">
         <thead>
-          <tr><th>ID</th><th>Título</th><th>Categoría</th><th>Estado</th><th>Prioridad</th><th>Creada</th></tr>
+          <tr><th>ID</th><th>Título</th><th>Categoría</th><th>Estado</th><th>Prioridad</th><th>Sugerida</th><th>Agente</th><th>Creada</th></tr>
         </thead>
         <tbody></tbody>
       </table>
     </section>
 
-    <section class="panel" data-rol="Agente" hidden>
-      <h2>Solicitudes asignadas</h2>
-      <p>Disponible en el Sprint 2 (HU05–HU08).</p>
+    <!-- HU10 / HU12 -->
+    <section class="panel" data-rol="Coordinador">
+      <h2>Indicadores y reportes</h2>
+      <div class="indicadores" id="indicadores">
+        <div><strong id="indicador-mediana">—</strong><span>horas medianas de ciclo</span></div>
+        <ul id="indicador-volumen"></ul>
+      </div>
+      <button class="secundario" id="btn-exportar-csv">Exportar CSV (con filtros de arriba)</button>
     </section>
 
-    <section class="panel" data-rol="Auditor" hidden>
+    <!-- HU05 / HU06 / HU07 / HU09 -->
+    <section class="panel" data-rol="Agente">
+      <h2>Solicitudes asignadas</h2>
+      <div class="filtros" id="filtros-asignadas">
+        <input type="search" data-filtro="q" placeholder="Buscar por título o descripción…" />
+        <select data-filtro="estado">
+          <option value="">Estado (todos)</option>
+          <option>Nuevo</option><option>Asignada</option><option>En progreso</option>
+          <option>Resuelta</option><option>Reabierta</option><option>Cerrada</option>
+        </select>
+        <select data-filtro="prioridad">
+          <option value="">Prioridad (todas)</option>
+          <option>Baja</option><option>Media</option><option>Alta</option>
+        </select>
+        <input type="text" data-filtro="categoria" placeholder="Categoría" />
+      </div>
+      <table id="tabla-asignadas">
+        <thead>
+          <tr><th>ID</th><th>Título</th><th>Estado</th><th>Cambiar a</th><th>Comentarios</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- HU11 -->
+    <section class="panel" data-rol="Auditor">
       <h2>Historial de auditoría</h2>
-      <p>Disponible en el Sprint 3 (HU09–HU12).</p>
+      <p class="meta">Solo lectura. Muestra actor, fecha, campo y valores anterior/nuevo de cada cambio.</p>
+      <table id="tabla-historial">
+        <thead>
+          <tr><th>Fecha</th><th>Solicitud</th><th>Actor</th><th>Campo</th><th>Anterior</th><th>Nuevo</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </section>
   </div>
 
